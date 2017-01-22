@@ -11,7 +11,6 @@ public class PelotaRebotando extends ApplicationAdapter {
 
 	SpriteBatch batch;
 	OrthographicCamera camera;
-
 	Pelota pelota;
 	PelotaConGravedad pelotaConGravedad;
 

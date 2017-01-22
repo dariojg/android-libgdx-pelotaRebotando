@@ -19,6 +19,5 @@ public class PelotaConGravedad extends Pelota {
     public void actualizarPosicion() {
         setVelocidadY(getVelocidadY() - 1); //Todo, corregir bug al llegar a posicion 0
         super.actualizarPosicion();
-
     }
 }

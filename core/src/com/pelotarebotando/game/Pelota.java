@@ -71,11 +71,6 @@ public class Pelota {
 
 
 
-
-    public float getVelocidadX() {
-        return velocidadX;
-    }
-
     public void setVelocidadX(float velocidadX) {
         this.velocidadX = velocidadX;
     }
