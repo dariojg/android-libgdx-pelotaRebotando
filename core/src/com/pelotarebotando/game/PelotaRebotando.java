@@ -13,10 +13,12 @@ public class PelotaRebotando extends ApplicationAdapter {
 	OrthographicCamera camera;
 
 	Pelota pelota;
+	PelotaConGravedad pelotaConGravedad;
 
 	@Override
 	public void create () {
-		pelota =  new Pelota(100, 200, 40, Color.CORAL);
+		pelota =  new Pelota(100, 100, 20, Color.CORAL);
+		pelotaConGravedad = new PelotaConGravedad(20, 460, 20, Color.CYAN);
 
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
@@ -32,9 +34,11 @@ public class PelotaRebotando extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 
 		pelota.inicializarPelota();
+		pelotaConGravedad.inicializarPelota();
 
 		batch.begin();
 		pelota.actualizarPosicion();
+		pelotaConGravedad.actualizarPosicion();
 		batch.end();
 
 	}
