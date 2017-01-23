@@ -14,20 +14,19 @@ public class Pelota {
 
     private ShapeRenderer pelota;
 
-    private float radio;
-    private float posicionX;
-    private float posicionY;
-    private Color color;
+    protected float radio;
+    protected float posicionX;
+    protected float posicionY;
+    protected Color color;
+    protected float velocidadX = 5;
+    protected float velocidadY = 5;
 
-
-    private float velocidadX = 5;
-    private float velocidadY = 5;
 
     public Pelota(float x, float y, float radio, Color color){
         this.radio = radio;
         this.posicionX = x;
         this.posicionY = y;
-        this. color = color;
+        this.color = color;
         pelota = new ShapeRenderer();
     }
 
@@ -42,12 +41,13 @@ public class Pelota {
         posicionX += velocidadX;
         posicionY += velocidadY;
 
-        if(estoyEnUnBordeY())
+        if(estoyEnUnBordeY()) {
             cambiarDireccionY();
+        }
 
-        if(estoyEnUnBordeX())
-           cambiarDireccionX();
-
+        if(estoyEnUnBordeX()) {
+            cambiarDireccionX();
+        }
 
         pelota.circle(posicionX, posicionY, radio);
         pelota.end();
@@ -62,25 +62,11 @@ public class Pelota {
     }
 
     protected boolean estoyEnUnBordeY(){
-       return posicionY == 480  - radio/2 || posicionY < radio;
+       return posicionY == 480  - radio/2 || posicionY <= radio;
     }
 
     protected boolean estoyEnUnBordeX(){
-        return posicionX == 800 - radio/2 || posicionX < radio;
-    }
-
-
-
-    public void setVelocidadX(float velocidadX) {
-        this.velocidadX = velocidadX;
-    }
-
-    public float getVelocidadY() {
-        return velocidadY;
-    }
-
-    public void setVelocidadY(float velocidadY) {
-        this.velocidadY = velocidadY;
+        return posicionX == 800 - radio/2 || posicionX <= radio;
     }
 
 }
