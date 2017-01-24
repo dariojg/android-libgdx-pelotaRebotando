@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Input.Peripheral;
 
 public class PelotaRebotando extends ApplicationAdapter {
 
@@ -18,10 +19,10 @@ public class PelotaRebotando extends ApplicationAdapter {
 	public void create () {
 		pelota =  new Pelota(100, 100, 20, Color.CORAL);
 		pelotaConGravedad = new PelotaConGravedad(20, 460, 20, Color.CYAN);
-
 		batch = new SpriteBatch();
+
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 480);
+		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@Override

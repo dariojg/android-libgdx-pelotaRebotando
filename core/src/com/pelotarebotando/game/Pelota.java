@@ -1,10 +1,11 @@
 package com.pelotarebotando.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 
-import java.util.Map;
 
 /**
  * Created by dario on 22/01/17.
@@ -13,20 +14,19 @@ import java.util.Map;
 public class Pelota {
 
     private ShapeRenderer pelota;
-
+    private Vector2 tamanioPantalla; //ajaa de libgdx vector 2 dimensiones, pioola!
     protected float radio;
-    protected float posicionX;
-    protected float posicionY;
+    protected Vector2 posicion;
+    protected Vector2 velocidad;
     protected Color color;
-    protected float velocidadX = 5;
-    protected float velocidadY = 5;
 
 
     public Pelota(float x, float y, float radio, Color color){
+        posicion =  new Vector2(x, y);
+        velocidad = new Vector2(5, 5);
         this.radio = radio;
-        this.posicionX = x;
-        this.posicionY = y;
         this.color = color;
+        tamanioPantalla = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         pelota = new ShapeRenderer();
     }
 
@@ -38,8 +38,8 @@ public class Pelota {
 
     public void actualizarPosicion(){
 
-        posicionX += velocidadX;
-        posicionY += velocidadY;
+        posicion.x += velocidad.x;
+        posicion.y += velocidad.y;
 
         if(estoyEnUnBordeY()) {
             cambiarDireccionY();
@@ -49,24 +49,24 @@ public class Pelota {
             cambiarDireccionX();
         }
 
-        pelota.circle(posicionX, posicionY, radio);
+        pelota.circle(posicion.x, posicion.y, radio);
         pelota.end();
     }
 
     protected void cambiarDireccionY(){
-        velocidadY = velocidadY * - 1;
+        velocidad.y = velocidad.y * - 1;
     }
 
     protected void cambiarDireccionX(){
-        velocidadX = velocidadX * -1;
+        velocidad.x = velocidad.x * -1;
     }
 
     protected boolean estoyEnUnBordeY(){
-       return posicionY == 480  - radio/2 || posicionY <= radio;
+        return posicion.y == tamanioPantalla.y  - radio/2 || posicion.y <= radio;
     }
 
     protected boolean estoyEnUnBordeX(){
-        return posicionX == 800 - radio/2 || posicionX <= radio;
+        return posicion.x == tamanioPantalla.x - radio/2 || posicion.x <= radio;
     }
 
 }
