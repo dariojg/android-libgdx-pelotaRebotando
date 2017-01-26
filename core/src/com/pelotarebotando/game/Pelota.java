@@ -37,7 +37,6 @@ public class Pelota {
     }
 
     public void actualizarPosicion(){
-
         posicion.x += velocidad.x;
         posicion.y += velocidad.y;
 
