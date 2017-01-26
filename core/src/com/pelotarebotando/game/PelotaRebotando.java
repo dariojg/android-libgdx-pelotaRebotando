@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class PelotaRebotando implements ApplicationListener {
 
@@ -33,21 +34,28 @@ public class PelotaRebotando implements ApplicationListener {
 
 	@Override
 	public void render () {
+		//limpio pantalla, la pinto de negro (como la camisa de bisbal)
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
-		font.setColor(Color.CYAN);
 
-		pelota.inicializarPelota();
-		pelotaConGravedad.inicializarPelota();
+		font.setColor(Color.CYAN);
+		//Primero se dibuja la pelota completa:
+		// pelota.begin()
+		// la dibujo
+		// pelota.end()
+		pelota.dibujar();
+		pelotaConGravedad.dibujar();
+		//Antes iniciaba el dibujo (pelota.begin()) antes de iniciar el batch y lo terminaba de dibujar (pelota.end()) después de actualizar la posición ya dentro del batch, por eso el quilombo al dibujar las fonts
+
+		// En el batch solo se actualizan posiciones para la próxima "dibujada".
+		// NOTA: el render se ejecuta 60 veces por segundo (60 fps) por default
 		batch.begin();
 		pelota.actualizarPosicion();
 		pelotaConGravedad.actualizarPosicion();
-		batch.end();
 
-		batch.begin();
 		font.draw(batch, "Datos pelota CYAN (con gravedad)", 40, 120);
 		font.draw(batch, "=========================", 40, 110);
 		font.draw(batch, "Velocidad X: " + pelotaConGravedad.velocidad.x, 40, 90);
@@ -55,7 +63,7 @@ public class PelotaRebotando implements ApplicationListener {
 		font.draw(batch, "Posicion X: " + pelotaConGravedad.posicion.x, 40, 50);
 		font.draw(batch, "Posicion Y: " + pelotaConGravedad.posicion.y, 40, 30);
 		batch.end();
-
+		//Ahora somos felices con un solo batch :D
 	}
 
 	@Override

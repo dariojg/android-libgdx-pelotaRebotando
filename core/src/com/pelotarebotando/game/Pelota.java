@@ -31,9 +31,11 @@ public class Pelota {
     }
 
 
-    public void inicializarPelota(){
+    public void dibujar(){
         pelota.begin(ShapeType.Filled);
         pelota.setColor(color);
+        pelota.circle(posicion.x, posicion.y, radio);
+        pelota.end();
     }
 
     public void actualizarPosicion(){
@@ -47,9 +49,6 @@ public class Pelota {
         if(estoyEnUnBordeX()) {
             cambiarDireccionX();
         }
-
-        pelota.circle(posicion.x, posicion.y, radio);
-        pelota.end();
     }
 
     protected void cambiarDireccionY(){
