@@ -42,10 +42,10 @@ public class PelotaRebotando implements ApplicationListener {
 
 		pelota.dibujar();
 		pelotaConGravedad.dibujar();
-
-		batch.begin();
 		pelota.actualizarPosicion();
 		pelotaConGravedad.actualizarPosicion();
+
+		batch.begin();
 
 		font.setColor(Color.CYAN);
 		font.draw(batch, "Datos pelota CYAN (con gravedad)", 40, 120);
